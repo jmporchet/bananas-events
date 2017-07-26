@@ -1,0 +1,27 @@
+{
+  "name": "padel-slack-bot",
+  "version": "0.0.1",
+  "description": "Slack bot to organize padel games",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JMP - Codeworks",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/client": "^3.10.0",
+    "dotenv": "^4.0.0",
+    "es6-promise": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1",
+    "koa": "^2.3.0",
+    "koa-body": "^2.3.0",
+    "koa-logger": "^3.0.1",
+    "koa-router": "^7.2.1",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "ngrok": "^2.2.15"
+  }
+}
