@@ -1,25 +1,19 @@
-'use strict';
 const utils = require('../utils/utils');
 
 class EventsController {
-
-  constructor() {
+  constructor () {
     this.events = [];
   }
 
   processMessage (eventInfo) {
-    // switch through create, list, delete
-    let event = utils._parseEvent(eventInfo);
+    const event = utils.parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
         return this.createEvent(event.params);
-        break;
       case 'list':
         return this.listEvents();
-        break;
       case 'delete':
         return this.deleteEvent(event.params);
-        break;
       default:
         return false;
     }
