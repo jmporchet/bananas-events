@@ -26,4 +26,6 @@ Run ```npm start``` or ```npm run dev```
 
 ## Use
 
-Type ```/padel at 13:00 tomorrow``` to create a new event
+Type ```/padel create 13:00 tomorrow``` to create a new event
+Type ```/padel list``` to get a list of scheduled events
+Type ```/padel delete 21``` to delete a specific event
