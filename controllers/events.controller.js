@@ -12,13 +12,13 @@ class EventsController {
     let event = utils._parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
-        this.createEvent(event.params);
+        return this.createEvent(event.params);
         break;
       case 'list':
-        this.listEvents();
+        return this.listEvents();
         break;
       case 'delete':
-        this.deleteEvent(event.params);
+        return this.deleteEvent(event.params);
         break;
       default:
         return false;
