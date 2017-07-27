@@ -9,16 +9,16 @@ class EventsController {
 
   processMessage (eventInfo) {
     // switch through create, list, delete
-    event = utils._parseEvent(eventInfo);
+    let event = utils._parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
-        createEvent(event.params);
+        this.createEvent(event.params);
         break;
       case 'list':
-        listEvents();
+        this.listEvents();
         break;
       case 'delete':
-        deleteEvent(event.params);
+        this.deleteEvent(event.params);
         break;
       default:
         return false;
@@ -36,8 +36,8 @@ class EventsController {
     return this.events;
   }
 
-  deleteEvent (id) {
-    const deleted = this.events.splice(id);
+  deleteEvent (idx) {
+    const deleted = this.events.splice(idx);
     if (deleted.length === 1) { return true; }
     else { return false; }
   }
