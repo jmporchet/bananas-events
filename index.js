@@ -7,6 +7,8 @@ require('dotenv').config();
 // const postUrl = process.env.SLACK_POST_URL;
 // const IncomingWebhook = require('@slack/client').IncomingWebhook;
 
+const events = require('./controllers/event.controller');
+
 const Koa = require('koa');
 const app = new Koa();
 const logger = require('koa-logger');
@@ -15,10 +17,9 @@ const router = require('koa-router')();
 
 router.post('/', (ctx, next) => {
   // receive information from Slack
-  console.log(ctx.request.body.text);
 
   // parse the event
-
+  events.processMessage(ctx.request.body.text);
   // store it in the database
 
   // confirm the operation to the user
