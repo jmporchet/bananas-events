@@ -20,11 +20,11 @@ router.post('/', (ctx, next) => {
   // receive information from Slack
 
   // parse the event
-  events.processMessage(ctx.request.body.text);
+  const result = events.processMessage(ctx.request.body.text);
   // store it in the database
-
+console.log('result',result);
   // confirm the operation to the user
-  ctx.body = `Command received: ${ctx.request.body.text}`;
+  ctx.body = `Command received: ${ctx.request.body.text}, response ${JSON.stringify(result)}`;
 
   next();
 });
