@@ -7,7 +7,7 @@ require('dotenv').config();
 // const postUrl = process.env.SLACK_POST_URL;
 // const IncomingWebhook = require('@slack/client').IncomingWebhook;
 
-const events = require('./controllers/event.controller');
+const events = require('./controllers/events.controller');
 
 const Koa = require('koa');
 const app = new Koa();
