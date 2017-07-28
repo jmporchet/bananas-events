@@ -30,7 +30,7 @@ class Event {
   async createEvent (info) {
     const date = new Date();
     try {
-      return await this.event.create({info: info, date});
+      return await this.event.create({info: info.join(), date});
     } catch (error) {
       console.error(error);
     }
