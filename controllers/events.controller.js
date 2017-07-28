@@ -1,39 +1,42 @@
-const utils = require('../utils/utils');
+const utils = require('../utils/helpers');
+const Event = require('../models/event');
 
 class EventsController {
   constructor () {
     this.events = [];
+    this.event = new Event();
   }
 
-  processMessage (eventInfo) {
+  async processMessage (eventInfo) {
     const event = utils.parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
-        return this.createEvent(event.params);
+        return await this.createEvent(event.params);
       case 'list':
-        return this.listEvents();
+        return await this.listEvents();
       case 'delete':
-        return this.deleteEvent(event.params);
+        return await this.deleteEvent(event.params[0]);
       default:
         return false;
     }
   }
 
-  createEvent (info) {
+  async createEvent (info) {
     if (info === '' || !info || info === false) {
       return false;
     }
-    return this.events.push(info);
+    const event = await this.event.createEvent(info.toString());
+    return event;
   }
 
-  listEvents () {
-    return this.events;
+  async listEvents () {
+    const events = await this.event.getEvents();
+    return events;
   }
 
-  deleteEvent (idx) {
-    const deleted = this.events.splice(idx);
-    if (deleted.length === 1) { return true; }
-    else { return false; }
+  async deleteEvent (id) {
+    const deleted = this.event.deleteEvent(id);
+    return deleted;
   }
 
 }
