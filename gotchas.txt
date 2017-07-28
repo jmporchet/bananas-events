@@ -1,5 +1,6 @@
 how to name the processMessage function
 understanding what I want to do, in an iterative way
 starting to work with Trello
-understanding the difference between a bot and a slash function
-testing private methods
+understanding the difference between a bot and a slash function, and how all the parts tie in together
+testing private class methods
+lack of up-to-date tutorials/documentation for sequelize
