@@ -3,11 +3,11 @@
 require('chai').should();
 
 const mocks = require('./mocks');
-const utils = require('../utils/utils');
+const utils = require('../utils/helpers');
 
-describe('Parse events', function () {
+describe('Parse events', () => {
 
-  it('should parse the correct action', function () {
+  it('should parse the correct action', () => {
     utils.parseEvent(mocks.create).action.should.equal('create');
     utils.parseEvent(mocks.list).action.should.equal('list');
     utils.parseEvent(mocks.delete).action.should.equal('delete');
