@@ -35,7 +35,7 @@ class EventsController {
   }
 
   async deleteEvent (id) {
-    const deleted = this.event.deleteEvent(id);
+    const deleted = await this.event.deleteEvent(id);
     return deleted;
   }
 
