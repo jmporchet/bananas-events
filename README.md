@@ -16,9 +16,15 @@ Fork and clone the repo
 
 Run ```npm install``` to install the dependencies
 
-Download [ngrok](https://dashboard.ngrok.com/get-started) and follow the instructions to start it from the command line
+Download [ngrok](https://dashboard.ngrok.com/get-started) and follow the instructions to start it from the command line (```./ngrok http 53142```)
 
-In the [Slack slash command settings](https://api.slack.com/apps/A6EMKTEAJ/slash-commands) create a /padel command if it doesn't exist and set the ```Request URL``` to the ngrok output, or edit the /padel command Request URL
+In the [Slack slash command settings](https://api.slack.com/apps/A6EMKTEAJ/slash-commands) create a /padel command if it doesn't exist yet
+
+
+
+> **IMPORTANT**: Every time  you restart ```ngrok``` you'll have to update the [/padel command's](https://api.slack.com/apps/A6EMKTEAJ/slash-commands) ```Request URL``` and set it to what ```ngrok```'s ```Forwarding``` URL
+
+
 
 Run ```npm start``` or ```npm run dev```
 
