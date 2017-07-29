@@ -25,12 +25,12 @@ class EventsController {
     if (info === '' || !info || info === false) {
       return false;
     }
-    const event = await this.event.createEvent(info.toString());
+    const event = await this.event.createEvent(info.join(' '));
     return event;
   }
 
   async listEvents () {
-    const events = await this.event.getEvents();
+    const events = utils.formatEventList(await this.event.getEvents());
     return events;
   }
 
