@@ -26,7 +26,7 @@ class EventsController {
       return false;
     }
     const event = await this.event.createEvent(info.join(' '));
-    return event;
+    return `Event id ${event.dataValues.id} created`;
   }
 
   async listEvents () {
@@ -35,8 +35,7 @@ class EventsController {
   }
 
   async deleteEvent (id) {
-    const deleted = await this.event.deleteEvent(id);
-    return deleted;
+    return (await this.event.deleteEvent(id) !== 0) ? `Event ${id} deleted` : 'Event not found';
   }
 
 }

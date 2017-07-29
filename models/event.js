@@ -30,7 +30,7 @@ class Event {
   async createEvent (info) {
     const date = new Date();
     try {
-      return await this.event.create({info: info.join(), date});
+      return await this.event.create({info: info, date});
     } catch (error) {
       console.error(error);
     }
@@ -38,12 +38,7 @@ class Event {
 
   async deleteEvent (id) {
     try {
-      console.log('deleting',id);
-      return await this.event.destroy({
-        where: {
-          id: id
-        }
-      });
+      return await this.event.destroy({ where: { id: id } });
     } catch (error) {
       console.error(error);
     }

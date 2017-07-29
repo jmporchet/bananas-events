@@ -12,8 +12,11 @@ const router = require('koa-router')();
 router.post('/', async (ctx, next) => {
   const result = await events.processMessage(ctx.request.body.text);
   console.log('this is what I got:', result);
-  // confirm the operation to the user
-  ctx.body = `Command received: ${ctx.request.body.text}, response ${JSON.stringify(result)}`;
+
+  ctx.body = {
+    "response_type": "in_channel",
+    "text" : result
+  };
 
   next();
 });
