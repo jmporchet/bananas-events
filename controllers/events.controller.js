@@ -1,5 +1,6 @@
 const utils = require('../utils/helpers');
 const Event = require('../models/event');
+const Strings = require('../utils/strings');
 
 class EventsController {
   constructor () {
@@ -17,7 +18,7 @@ class EventsController {
       case 'delete':
         return await this.deleteEvent(event.params[0]);
       default:
-        return false;
+        return Strings.INVALID_COMMAND;
     }
   }
 
@@ -30,8 +31,7 @@ class EventsController {
   }
 
   async listEvents () {
-    const events = utils.formatEventList(await this.event.getEvents());
-    return events;
+    return utils.formatEventList(await this.event.getEvents());
   }
 
   async deleteEvent (id) {
