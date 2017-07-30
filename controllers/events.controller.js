@@ -28,10 +28,15 @@ class EventsController {
     }
     const event = await this.event.createEvent(info.join(' '));
     return `Event id ${event.dataValues.id} created`;
+    return utils.formatEvent(event.dataValues)
   }
 
   async listEvents () {
     return utils.formatEventList(await this.event.getEvents());
+    const eventList = await this.event.getEvents();
+    return utils.formatEventList(eventList);
+  }
+
   }
 
   async deleteEvent (id) {

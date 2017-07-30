@@ -13,10 +13,7 @@ router.post('/', async (ctx, next) => {
   const result = await events.processMessage(ctx.request.body.text);
   console.log('this is what I got:', result);
 
-  ctx.body = {
-    "response_type": "in_channel",
-    "text" : result
-  };
+  ctx.body = result;
 
   next();
 });

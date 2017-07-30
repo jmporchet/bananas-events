@@ -11,10 +11,44 @@ module.exports.formatEventList = (events) => {
   if (events.length < 1) {
     return Strings.NO_EVENTS;
   }
+
   let eventlist = events.map( el => {
     return (({ id, info, date }) => ({ id, info, date }))(el);
   });
-  return Strings.EVENT_LIST + eventlist.map( ev => {
-    return `\n ${ev.id} ${ev.info} ${ev.date}`
-  }).join()
+
+  const eventListMessage = Strings.EVENT_LIST + eventlist.map( ev => {
+    return `\n ${ev.id} ${ev.info} ${ev.date}`;
+  }).join();
+
+  return {
+    "response_type": "in_channel",
+    "text" : eventListMessage
+  }
+};
+
+module.exports.formatEvent = (event) => {
+  
+  return {
+    "response_type": "in_channel",
+    "text" : event.info,
+    "attachments": [{
+      "text": "Will you come to this event?",
+      "actions": [
+          {
+            "name": "game",
+            "text": "Register",
+            "type": "button",
+            "value": event.id
+          }
+        ]
+    }]
+  }
+}
+
+module.exports.formatResponse = (message) => {
+  return {
+    "response_type": "in_channel",
+    "text" : message
+  }
+
 }
