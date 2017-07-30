@@ -15,6 +15,8 @@ class EventsController {
         return await this.createEvent(event.params);
       case 'list':
         return await this.listEvents();
+      case 'next':
+        return await this.getNextEvent();
       case 'delete':
         return await this.deleteEvent(event.params[0]);
       default:
@@ -27,16 +29,17 @@ class EventsController {
       return false;
     }
     const event = await this.event.createEvent(info.join(' '));
-    return `Event id ${event.dataValues.id} created`;
     return utils.formatEvent(event.dataValues)
   }
 
   async listEvents () {
-    return utils.formatEventList(await this.event.getEvents());
     const eventList = await this.event.getEvents();
     return utils.formatEventList(eventList);
   }
 
+  async getNextEvent () {
+    const nextEvent = await this.event.getNextEvent();
+    return utils.formatEvent(nextEvent.dataValues)
   }
 
   async deleteEvent (id) {

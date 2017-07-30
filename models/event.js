@@ -27,6 +27,14 @@ class Event {
     }
   }
 
+  async getNextEvent () {
+    try {
+      return await this.event.findOne({ order: [ ['date', 'ASC']]});
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async createEvent (info) {
     const date = new Date();
     try {

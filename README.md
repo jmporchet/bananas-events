@@ -30,6 +30,8 @@ Run ```npm start``` or ```npm run dev```
 
 ## Use
 
+Type ```/padel next``` to see the next event
+
 Type ```/padel create 13:00 tomorrow``` to create a new event
 
 Type ```/padel list``` to get a list of scheduled events
