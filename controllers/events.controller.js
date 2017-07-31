@@ -1,4 +1,4 @@
-const utils = require('../utils/helpers');
+const utils = require('../serializers/events.serializer');
 const Event = require('../models/event');
 const Strings = require('../utils/strings');
 

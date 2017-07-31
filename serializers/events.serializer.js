@@ -1,6 +1,6 @@
 'use strict';
 
-const Strings = require('./strings');
+const Strings = require('../utils/strings');
 
 module.exports.parseEvent = (eventInfo) => {
   const [action, ...params] = eventInfo.split(' ');
@@ -27,20 +27,22 @@ module.exports.formatEventList = (events) => {
 };
 
 module.exports.formatEvent = (event) => {
-  
+
   return {
     "response_type": "in_channel",
     "text" : event.info,
     "attachments": [{
       "text": "Will you come to this event?",
+      "attachment_type": "default",
       "actions": [
           {
-            "name": "game",
+            "name": "register",
             "text": "Register",
             "type": "button",
             "value": event.id
           }
-        ]
+        ],
+        "callback_id": "participate",
     }]
   }
 }
