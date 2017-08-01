@@ -29,7 +29,7 @@ class EventsController {
       return false;
     }
     const event = await this.event.createEvent(info.join(' '));
-    return utils.formatEvent(event.dataValues)
+    return utils.formatNewEvent(event.dataValues);
   }
 
   async listEvents () {
@@ -39,7 +39,7 @@ class EventsController {
 
   async getNextEvent () {
     const nextEvent = await this.event.getNextEvent();
-    return utils.formatEvent(nextEvent.dataValues)
+    return utils.formatNewEvent(nextEvent.dataValues);
   }
 
   async deleteEvent (id) {

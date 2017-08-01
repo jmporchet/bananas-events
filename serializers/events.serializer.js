@@ -21,36 +21,57 @@ module.exports.formatEventList = (events) => {
   }).join();
 
   return {
-    "response_type": "in_channel",
-    "text" : eventListMessage
-  }
+    'response_type': 'in_channel',
+    'text' : eventListMessage
+  };
 };
 
-module.exports.formatEvent = (event) => {
+module.exports.formatNewEvent = (event) => {
 
   return {
-    "response_type": "in_channel",
-    "text" : event.info,
-    "attachments": [{
-      "text": "Will you come to this event?",
-      "attachment_type": "default",
-      "actions": [
-          {
-            "name": "register",
-            "text": "Register",
-            "type": "button",
-            "value": event.id
-          }
-        ],
-        "callback_id": "participate",
+    'response_type': 'in_channel',
+    'text' : event.info,
+    'attachments': [{
+      'text': 'A new event has just been created! Will you attend?',
+      'attachment_type': 'default',
+      'actions': [
+        {
+          'name': 'register',
+          'text': 'Register',
+          'type': 'button',
+          'value': event.id
+        }
+      ],
+      'callback_id': 'participate',
     }]
-  }
-}
+  };
+};
+
+module.exports.formatRegisteredEvent = (event) => {
+
+  return {
+    'response_type': 'ephemeral',
+    'text' : event.info,
+    'attachments': [{
+      'text': 'A new event has just been created! Will you attend?',
+      'attachment_type': 'default',
+      'actions': [
+        {
+          'name': 'unregister',
+          'text': 'Unregister',
+          'type': 'button',
+          'value': event.id
+        }
+      ],
+      'callback_id': 'participate',
+    }]
+  };
+};
 
 module.exports.formatResponse = (message) => {
   return {
-    "response_type": "in_channel",
-    "text" : message
-  }
+    'response_type': 'in_channel',
+    'text' : message
+  };
 
-}
+};
