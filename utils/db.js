@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const Console = console;
 
 const sequelize = new Sequelize('event', null, null, {
   host: 'localhost',
@@ -9,10 +10,10 @@ const sequelize = new Sequelize('event', null, null, {
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Database connection established successfully.');
+    Console.log('Database connection established successfully.');
   })
   .catch(err => {
-    console.error('Unable to connect to the database:', err);
+    Console.error('Unable to connect to the database:', err);
   });
 
 module.exports = sequelize;

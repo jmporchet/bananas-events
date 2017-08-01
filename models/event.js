@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../utils/db');
+const Console = console;
 
 class Event {
   constructor () {
@@ -23,7 +24,7 @@ class Event {
     try {
       return await this.event.findAll();
     } catch (error) {
-      console.error(error);
+      Console.error(error);
     }
   }
 
@@ -31,7 +32,7 @@ class Event {
     try {
       return await this.event.findOne({ order: [ ['date', 'ASC']]});
     } catch (error) {
-      console.error(error);
+      Console.error(error);
     }
   }
 
@@ -40,7 +41,7 @@ class Event {
     try {
       return await this.event.create({info: info, date});
     } catch (error) {
-      console.error(error);
+      Console.error(error);
     }
   }
 
@@ -48,7 +49,7 @@ class Event {
     try {
       return await this.event.destroy({ where: { id: id } });
     } catch (error) {
-      console.error(error);
+      Console.error(error);
     }
   }
 

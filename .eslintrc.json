@@ -8,7 +8,8 @@
   },
   "extends": "eslint:recommended",
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 8
   },
   "plugins": [
     "json"
@@ -29,6 +30,7 @@
     "space-before-blocks": "error",
     "space-before-function-paren": "error",
     "no-undef": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "no-case-declarations": "off"
   }
 }
