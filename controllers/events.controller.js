@@ -3,18 +3,14 @@ const Event = require('../models/event');
 const Strings = require('../utils/strings');
 
 class EventsController {
-  constructor () {
-    this.events = [];
-    this.event = new Event();
-  }
 
   async processMessage (eventInfo) {
     const event = utils.parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
         return await this.createEvent(event.params);
-      case 'list':
-        return await this.listEvents();
+      // case 'list':
+      //   return await this.listEvents();
       case 'next':
         return await this.getNextEvent();
       case 'delete':
@@ -28,22 +24,23 @@ class EventsController {
     if (info === '' || !info || info === false) {
       return false;
     }
-    const event = await this.event.createEvent(info.join(' '));
+    const event = await Event.createEvent(info.join(' '));
     return utils.formatNewEvent(event.dataValues);
   }
 
-  async listEvents () {
-    const eventList = await this.event.getEvents();
-    return utils.formatEventList(eventList);
-  }
+  /* The list feature is WIP */
+  // async listEvents () {
+  //   const eventList = await Event.getEvents();
+  //   return utils.formatEventList(eventList);
+  // }
 
   async getNextEvent () {
-    const nextEvent = await this.event.getNextEvent();
+    const nextEvent = await Event.getNextEvent();
     return utils.formatNewEvent(nextEvent.dataValues);
   }
 
   async deleteEvent (id) {
-    return (await this.event.deleteEvent(id) !== 0) ? `Event ${id} deleted` : 'Event not found';
+    return (await Event.deleteEvent(id) !== 0) ? `Event ${id} deleted` : 'Event not found';
   }
 
 }

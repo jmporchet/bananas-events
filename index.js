@@ -23,7 +23,7 @@ let config = {
 const controller = Botkit.slackbot(config).configureSlackApp({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  scopes: ['commands']
+  scopes: ['commands', 'channels:read']
 });
 
 controller.setupWebserver(process.env.PORT, function (err, webserver) {
@@ -59,16 +59,13 @@ controller.on('slash_command', async function (slashCommand, message) {
       const result = await events.processMessage(message.text);
 
       slashCommand.replyPublic(message, result); // display a creation message
-      // get list of users
-
-      // loop through each user and send them a private message to register
 
       return;
 
     default:
       slashCommand.replyPublic(
         message,
-        'I\'m afraid I don\'t know how to ' + message.command + ' yet.'
+        message.command + ' has not been implemented yet.'
       );
   }
 });
@@ -79,11 +76,19 @@ controller.on('interactive_message_callback', function (bot, trigger) {
 
   switch (trigger.actions[0].name) {
     case 'register':
-      // console.log(trigger);
-      bot.replyPrivateDelayed(trigger, {
-        'replace_original': true,
-        'text' : 'event info'
-      });
+      // This will need to be refactored and go into the controller and serializer
+      if (trigger.original_message.attachments.length < 2) {
+        // We need to store the participants in a column in the events table as a JSON object
+        trigger.original_message.attachments.push({
+          'title': 'People attending (1)',
+          'text': '<@' + trigger.user + '>'
+        });
+      } else if (trigger.original_message.attachments[1].text.indexOf(trigger.user) === -1) {
+        trigger.original_message.attachments[1].title = 'People attending (' + Number(trigger.original_message.attachments[1].text.match(/@/g).length+1) + ')';
+        trigger.original_message.attachments[1].text = trigger.original_message.attachments[1].text + ' <@' + trigger.user + '>';
+      }
+
+      bot.replyInteractive(trigger, trigger.original_message);
       break;
   }
 });

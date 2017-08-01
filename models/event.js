@@ -11,17 +11,18 @@ const Event = sequelize.define('event', {
   }
 });
 
-module.exports.getEvents = async () => {
-  try {
-    return await this.event.findAll();
-  } catch (error) {
-    Console.error(error);
-  }
-};
+/* The list feature is not used for the moment */
+// module.exports.getEvents = async () => {
+//   try {
+//     return await Event.findAll();
+//   } catch (error) {
+//     Console.error(error);
+//   }
+// };
 
 module.exports.getNextEvent = async () => {
   try {
-    return await this.event.findOne({ order: [ ['date', 'ASC']]});
+    return await Event.findOne({ order: [ ['date', 'ASC']]});
   } catch (error) {
     Console.error(error);
   }
@@ -30,7 +31,7 @@ module.exports.getNextEvent = async () => {
 module.exports.createEvent = async (info) => {
   const date = new Date();
   try {
-    return await this.event.create({info: info, date});
+    return await Event.create({info: info, date});
   } catch (error) {
     Console.error(error);
   }
@@ -38,7 +39,7 @@ module.exports.createEvent = async (info) => {
 
 module.exports.deleteEvent = async (id) => {
   try {
-    return await this.event.destroy({ where: { id: id } });
+    return await Event.destroy({ where: { id: id } });
   } catch (error) {
     Console.error(error);
   }
