@@ -1,25 +1,19 @@
-'use strict';
 const utils = require('../utils/utils');
 
 class EventsController {
-
-  constructor() {
+  constructor () {
     this.events = [];
   }
 
   processMessage (eventInfo) {
-    // switch through create, list, delete
-    event = utils._parseEvent(eventInfo);
+    const event = utils.parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
-        createEvent(event.params);
-        break;
+        return this.createEvent(event.params);
       case 'list':
-        listEvents();
-        break;
+        return this.listEvents();
       case 'delete':
-        deleteEvent(event.params);
-        break;
+        return this.deleteEvent(event.params);
       default:
         return false;
     }
@@ -36,8 +30,8 @@ class EventsController {
     return this.events;
   }
 
-  deleteEvent (id) {
-    const deleted = this.events.splice(id);
+  deleteEvent (idx) {
+    const deleted = this.events.splice(idx);
     if (deleted.length === 1) { return true; }
     else { return false; }
   }
