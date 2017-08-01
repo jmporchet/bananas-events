@@ -1,0 +1,71 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Padel slack bot",
+		"_postman_id": "2fbfa49f-85d1-ca10-1458-13c4c32600bf",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create event",
+			"request": {
+				"url": "{{url}}/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"create tomorrow at 13:00\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List events",
+			"request": {
+				"url": "{{url}}/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"list\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete event",
+			"request": {
+				"url": "{{url}}/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"delete 1\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

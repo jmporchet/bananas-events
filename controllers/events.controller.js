@@ -1,39 +1,49 @@
-const utils = require('../utils/utils');
+const utils = require('../serializers/events.serializer');
+const Event = require('../models/event');
+const Strings = require('../utils/strings');
 
 class EventsController {
   constructor () {
     this.events = [];
+    this.event = new Event();
   }
 
-  processMessage (eventInfo) {
+  async processMessage (eventInfo) {
     const event = utils.parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
-        return this.createEvent(event.params);
+        return await this.createEvent(event.params);
       case 'list':
-        return this.listEvents();
+        return await this.listEvents();
+      case 'next':
+        return await this.getNextEvent();
       case 'delete':
-        return this.deleteEvent(event.params);
+        return await this.deleteEvent(event.params[0]);
       default:
-        return false;
+        return Strings.INVALID_COMMAND;
     }
   }
 
-  createEvent (info) {
+  async createEvent (info) {
     if (info === '' || !info || info === false) {
       return false;
     }
-    return this.events.push(info);
+    const event = await this.event.createEvent(info.join(' '));
+    return utils.formatEvent(event.dataValues)
   }
 
-  listEvents () {
-    return this.events;
+  async listEvents () {
+    const eventList = await this.event.getEvents();
+    return utils.formatEventList(eventList);
   }
 
-  deleteEvent (idx) {
-    const deleted = this.events.splice(idx);
-    if (deleted.length === 1) { return true; }
-    else { return false; }
+  async getNextEvent () {
+    const nextEvent = await this.event.getNextEvent();
+    return utils.formatEvent(nextEvent.dataValues)
+  }
+
+  async deleteEvent (id) {
+    return (await this.event.deleteEvent(id) !== 0) ? `Event ${id} deleted` : 'Event not found';
   }
 
 }
