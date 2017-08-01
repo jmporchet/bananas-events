@@ -1,5 +1,8 @@
 ngrok
 .env
+*.txt
+*.sqlite
+db_slackbutton_slash_command
 
 .DS_Store
 
