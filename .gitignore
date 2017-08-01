@@ -1,5 +1,7 @@
 ngrok
 .env
+*.txt
+*.sqlite
 
 .DS_Store
 

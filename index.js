@@ -9,9 +9,9 @@ const events = new Events();
 const app = new Koa();
 const router = require('koa-router')();
 
-router.post('/', (ctx, next) => {
-  const result = events.processMessage(ctx.request.body.text);
-  // store it in the database
+router.post('/', async (ctx, next) => {
+  const result = await events.processMessage(ctx.request.body.text);
+  console.log('this is what I got:', result);
   // confirm the operation to the user
   ctx.body = `Command received: ${ctx.request.body.text}, response ${JSON.stringify(result)}`;
 
@@ -24,4 +24,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(53142);
+
+app.listen(53142, () => {
+  console.log('App started and listening on port 53142')
+});
