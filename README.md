@@ -30,20 +30,25 @@ Type ```/padel create 13:00 tomorrow``` to create a new event
 
 Type ```/padel next``` to see the next event
 
-## Roadmap
+## Contributing
 
-- possibility to unregister for an event
+- fix the tests by mocking the database data
 
-- implement a database persistance for the attendance
+- replace the file store database on which this BotKit implementation relies by a table in the app's SQlite database.
 
-- list upcoming events and sort them by date
+- implement a database persistance for the attendance tracking
+
+- add button to unregister from an event
+
+- list upcoming events and sort them by date, with their corresponding attendance
+
+- add configurable event reminders
+
+- add the events to people's Google/Outlook calendars once they register
 
 - manage payments among participants (enter total amount, split by number of participants, send paypal link as DM)
 
-- decouple the localtunnel command line app from the bot and import it as a npm package
-
-- add the events to people's Google/Outlook calendars
-
+- decouple the localtunnel command line app from the bot on development
 
 
 Made with love in [Codeworks](http://www.codeworks.me)
