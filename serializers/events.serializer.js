@@ -38,7 +38,7 @@ module.exports.formatNewEvent = (event) => {
       'actions': [
         {
           'name': 'register',
-          'text': 'I\m interested!',
+          'text': 'I\'m interested!',
           'type': 'button',
           'value': event.id
         }
