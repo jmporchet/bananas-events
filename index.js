@@ -84,7 +84,7 @@ controller.on('interactive_message_callback', function (bot, trigger) {
           'text': '<@' + trigger.user + '>'
         });
       } else if (trigger.original_message.attachments[1].text.indexOf(trigger.user) === -1) {
-        trigger.original_message.attachments[1].title = 'People attending (' + Number(trigger.original_message.attachments[1].text.match(/@/g).length+1) + ')';
+        trigger.original_message.attachments[1].title = 'Interested people (' + Number(trigger.original_message.attachments[1].text.match(/@/g).length+1) + ')';
         trigger.original_message.attachments[1].text = trigger.original_message.attachments[1].text + ' <@' + trigger.user + '>';
       }
 
