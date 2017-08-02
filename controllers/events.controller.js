@@ -22,10 +22,13 @@ class EventsController {
 
   async createEvent (info) {
     if (info === '' || !info || info === false) {
+      console.log('no info provided');
       return false;
     }
+    console.log('info is', info);
     const event = await Event.createEvent(info.join(' '));
-    return eventsSerializer.formatNewEvent(event.dataValues);
+    console.log('event is', JSON.stringify(event));
+    return await eventsSerializer.formatNewEvent(event.dataValues);
   }
 
   /* The list feature is WIP */

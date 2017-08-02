@@ -1,11 +1,7 @@
 const Sequelize = require('sequelize');
 const Console = console;
 
-const sequelize = new Sequelize('event', null, null, {
-  host: 'localhost',
-  dialect: 'sqlite',
-  storage: './events.sqlite'
-});
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 sequelize
   .authenticate()
