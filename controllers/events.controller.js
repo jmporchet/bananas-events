@@ -1,11 +1,11 @@
-const utils = require('../serializers/events.serializer');
+const eventsSerializer = require('../serializers/events.serializer');
 const Event = require('../models/event');
 const Strings = require('../utils/strings');
 
 class EventsController {
 
   async processMessage (eventInfo) {
-    const event = utils.parseEvent(eventInfo);
+    const event = eventsSerializer.parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
         return await this.createEvent(event.params);
@@ -25,18 +25,18 @@ class EventsController {
       return false;
     }
     const event = await Event.createEvent(info.join(' '));
-    return utils.formatNewEvent(event.dataValues);
+    return eventsSerializer.formatNewEvent(event.dataValues);
   }
 
   /* The list feature is WIP */
   // async listEvents () {
   //   const eventList = await Event.getEvents();
-  //   return utils.formatEventList(eventList);
+  //   return eventsSerializer.formatEventList(eventList);
   // }
 
   async getNextEvent () {
     const nextEvent = await Event.getNextEvent();
-    return utils.formatNewEvent(nextEvent.dataValues);
+    return eventsSerializer.formatNewEvent(nextEvent.dataValues);
   }
 
   async deleteEvent (id) {
