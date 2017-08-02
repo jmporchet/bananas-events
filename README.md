@@ -20,7 +20,7 @@ Download localtunnel `npm install -g localtunnel` and execute it like this `lt -
 
 In the [Slack slash command settings](https://api.slack.com/apps/A6EMKTEAJ/slash-commands) create a /padel command if it doesn't exist yet
 
-Go to the [Slack admin panel's App  Credentials](https://api.slack.com/apps/A6EMKTEAJ/general) and use the information to start the application like this : `CLIENT_ID=<client id> CLIENT_SECRET=<client secret> VERIFICATION_TOKEN=<verification token> PORT=8765 npm run dev`
+Go to the [Slack admin panel's App  Credentials](https://api.slack.com/apps/A6EMKTEAJ/general) and use the information to start the application like this : `CLIENT_ID=<client id> CLIENT_SECRET=<client secret> VERIFICATION_TOKEN=<verification token> PORT=8765 npm run dev` 
 
 Authenticate the application with Oauth by going to (http://localhost:8765/login)
 
