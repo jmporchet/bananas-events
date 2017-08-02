@@ -29,11 +29,11 @@ module.exports.parseEvent = (eventInfo) => {
 
 module.exports.formatNewEvent = (event) => {
 
-  return {
+  let response = {
     'response_type': 'in_channel',
-    'text' : event.info,
+    'text': 'A new event has just been created! Will you attend?',
     'attachments': [{
-      'text': 'A new event has just been created! Will you attend?',
+      'text': event.info,
       'attachment_type': 'default',
       'actions': [
         {
@@ -46,4 +46,5 @@ module.exports.formatNewEvent = (event) => {
       'callback_id': 'participate',
     }]
   };
+  return response;
 };
