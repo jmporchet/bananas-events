@@ -1,39 +1,49 @@
-const utils = require('../utils/utils');
+const eventsSerializer = require('../serializers/events.serializer');
+const Event = require('../models/event');
+const Strings = require('../utils/strings');
 
 class EventsController {
-  constructor () {
-    this.events = [];
-  }
 
-  processMessage (eventInfo) {
-    const event = utils.parseEvent(eventInfo);
+  async processMessage (eventInfo) {
+    const event = eventsSerializer.parseEvent(eventInfo);
     switch (event.action) {
       case 'create':
-        return this.createEvent(event.params);
-      case 'list':
-        return this.listEvents();
+        return await this.createEvent(event.params);
+      // case 'list':
+      //   return await this.listEvents();
+      case 'next':
+        return await this.getNextEvent();
       case 'delete':
-        return this.deleteEvent(event.params);
+        return await this.deleteEvent(event.params[0]);
       default:
-        return false;
+        return Strings.INVALID_COMMAND;
     }
   }
 
-  createEvent (info) {
+  async createEvent (info) {
     if (info === '' || !info || info === false) {
+      console.log('no info provided');
       return false;
     }
-    return this.events.push(info);
+    console.log('info is', info);
+    const event = await Event.createEvent(info.join(' '));
+    console.log('event is', JSON.stringify(event));
+    return await eventsSerializer.formatNewEvent(event.dataValues);
   }
 
-  listEvents () {
-    return this.events;
+  /* The list feature is WIP */
+  // async listEvents () {
+  //   const eventList = await Event.getEvents();
+  //   return eventsSerializer.formatEventList(eventList);
+  // }
+
+  async getNextEvent () {
+    const nextEvent = await Event.getNextEvent();
+    return eventsSerializer.formatNewEvent(nextEvent.dataValues);
   }
 
-  deleteEvent (idx) {
-    const deleted = this.events.splice(idx);
-    if (deleted.length === 1) { return true; }
-    else { return false; }
+  async deleteEvent (id) {
+    return (await Event.deleteEvent(id) !== 0) ? `Event ${id} deleted` : 'Event not found';
   }
 
 }
