@@ -1,34 +1,51 @@
-# Padel Slack bot
+# Bananas Events Slack bot
 
-This Slack bot helps people organize various events like padel games.
+This bot makes it easy for people to organize informal events on their Slack server.
+
+
+
+## Use
+
+Type ```/event create Drinkgs after work @7pm at Hoppiness``` to create a new event
+
+
+![alt text](https://media.giphy.com/media/12r1EByyzocQow/giphy.gif "Bananas Events animated gif")
+
+Type ```/event next``` to see the next event
 
 ## Tech stack
 
-BotKit - listens to Slack requests and answers them
+[BotKit](https://github.com/howdyai/botkit) - listens to [Slack](https://api.slack.com) requests and responds to them
 
-Sqlite - stores event details
+[Sqlite](https://github.com/sequelize/sequelize) - stores event details
 
-Localtunnel - exposes the server to the internet if you're behind a NAT
+[Localtunnel](https://github.com/localtunnel/localtunnel) - exposes the server to the internet if you're running the bot behind a NAT
 
-## Installing
+## Deployment
+
+### Installing
 
 Fork and clone the repo
 
 Run `npm install` to install the dependencies
 
-Download localtunnel `npm install -g localtunnel` and execute it like this `lt --port 8765 --subdomain cwbcn `. Be aware that it can be unreliable, needing to be restarted frequently.
+Download localtunnel `npm install -g localtunnel` and execute it like this `lt --port 8765 --subdomain <yourdomain> `. Be aware that it can be unreliable, needing to be restarted frequently.
 
-In the [Slack slash command settings](https://api.slack.com/apps/A6EMKTEAJ/slash-commands) create a /padel command if it doesn't exist yet
-
-Go to the [Slack admin panel's App  Credentials](https://api.slack.com/apps/A6EMKTEAJ/general) and use the information to start the application like this : `CLIENT_ID=<client id> CLIENT_SECRET=<client secret> VERIFICATION_TOKEN=<verification token> PORT=8765 npm run dev` 
+If your database is empty, you'll need to add the following line to the models/event.js file:
+`Event.sync({force: true})` ([discussion](https://stackoverflow.com/a/39689092/925517)).
+Remove that line once you've run the code one time.
 
 Authenticate the application with Oauth by going to (http://localhost:8765/login)
 
-## Use
+### Slack configuration
 
-Type ```/padel create 13:00 tomorrow``` to create a new event
+Go to the [Slack admin panel's App  Credentials](https://api.slack.com/apps/) and create a new application
 
-Type ```/padel next``` to see the next event
+In the Interactive Messages, enable them and set the Request URL to `<your server>/slack/receive`.
+
+In the Slash Commands, create a new command called `/event`, and set the Request URL to `<your server>/slack/receive`.
+
+On the general tab use the information to start the application like this : `CLIENT_ID=<client id> CLIENT_SECRET=<client secret> VERIFICATION_TOKEN=<verification token> PORT=8765 npm run dev`
 
 ## Contributing
 
