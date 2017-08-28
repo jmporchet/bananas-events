@@ -1,23 +1,25 @@
 # Bananas Events Slack bot
 
-This bot makes it easy for people to organize informal events on their Slack server.
+Keeping track of attendance when organizing informal events in a company is often a pain point.
+Bananas Events is a Slack bot that aims to simplify this process, by harnessing the power of Slack as an Operating System for companies.
 
+![screenshot](https://media.giphy.com/media/12r1EByyzocQow/giphy.gif "Bananas Events animated gif")
 
+## Usage
 
-## Use
+- Type ```/event create Drinks after work @7pm at Hoppiness``` to create a new event
 
-Type ```/event create Drinkgs after work @7pm at Hoppiness``` to create a new event
-
-
-![alt text](https://media.giphy.com/media/12r1EByyzocQow/giphy.gif "Bananas Events animated gif")
-
-Type ```/event next``` to see the next event
+- Type ```/event next``` to see the next event
 
 ## Tech stack
 
-[BotKit](https://github.com/howdyai/botkit) - listens to [Slack](https://api.slack.com) requests and responds to them
+[Koa](https://github.com/koajs) - listens to [Slack](https://api.slack.com) requests
 
-[Sqlite](https://github.com/sequelize/sequelize) - stores event details
+[BotKit](https://github.com/howdyai/botkit) - interprets the requests and responds to them
+
+[Sqlite](https://github.com/sequelize/sequelize) - stores event details locally
+
+[Postgresql](https://www.postgresql.org/) - used when deploying to [Heroku](https://dashboard.heroku.com/)
 
 [Localtunnel](https://github.com/localtunnel/localtunnel) - exposes the server to the internet if you're running the bot behind a NAT
 
