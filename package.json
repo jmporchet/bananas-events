@@ -1,7 +1,7 @@
 {
-  "name": "padel-slack-bot",
+  "name": "bananas-events-slack-bot",
   "version": "0.0.1",
-  "description": "Slack bot to organize padel games",
+  "description": "Slack bot to organize informal events",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

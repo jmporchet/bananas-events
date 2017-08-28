@@ -45,7 +45,7 @@ controller.setupWebserver(process.env.PORT, function (err, webserver) {
 /** ANSWERS SLASH COMMANDS **/
 controller.on('slash_command', async function (slashCommand, message) {
   switch (message.command) {
-    case '/padel': //handle the `/echo` slash command. We might have others assigned to this app too!
+    case '/event': //handle the `/echo` slash command. We might have others assigned to this app too!
       // but first, let's make sure the token matches!
       if (message.token !== process.env.VERIFICATION_TOKEN) return; //just ignore it.
 
